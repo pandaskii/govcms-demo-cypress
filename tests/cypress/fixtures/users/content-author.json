@@ -1,0 +1,8 @@
+{
+    "firstname": "Author",
+    "lastname": "Example",
+    "email": "content.author@demo.govcms.test",
+    "password": "123456",
+    "lang": "english",
+    "role": "govcms_content_author"
+}

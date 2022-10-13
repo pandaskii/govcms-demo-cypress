@@ -1,0 +1,43 @@
+{
+  "name": "govcms-ops-testing-demo",
+  "version": "1.0.0",
+  "description": "Cypress integration for GovCMS Ops testing demo",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.json,.eslintrc .",
+    "lint:fix": "yarn lint --fix",
+    "stop-only": "npx stop-only --skip .cy,node_modules --exclude e2e.coffee"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "cypress": "^10.7.0",
+    "cypress-xpath": "^2.0.1"
+  },
+  "devDependencies": {
+    "@cypress/eslint-plugin-json": "^3.2.3",
+    "eslint": "^8.23.0",
+    "eslint-plugin-chai-friendly": "^0.7.1",
+    "eslint-plugin-cypress": "^2.11.3",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
+  },
+  "license": "GPL-2.0",
+  "repository": "https://github.com/govCMS/GovCMS",
+  "author": "Joseph Zhao <pandaski@outlook.com.au>",
+  "lint-staged": {
+    "*.coffee": [
+      "yarn stop-only --folder",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx,json,eslintrc}": [
+      "yarn stop-only --folder",
+      "yarn eslint --fix",
+      "git add"
+    ]
+  }
+}

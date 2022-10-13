@@ -1,0 +1,36 @@
+# Cypress
+tests/cypress/videos
+tests/cypress/screenshots
+
+# Ignore local variables.
+.env
+local.tiltfile
+sites/*/database/
+sites/*/modules/
+sites/*/themes/
+sites/*/review/
+sites/*/sites/default/files/*
+
+# Ignore data.
+data/mariadb/db
+
+# Composer vendor
+composer.lock
+vendor/
+vendor/.git
+
+# Node
+yarn-error.log
+node_modules/
+
+# PHPStorm
+.idea/
+atlassian-ide-plugin.xml
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# .lock files
+*.lock

@@ -1,0 +1,68 @@
+x-volumes: &default-volumes 
+
+x-environment: &default-environment 
+
+x-user: &default-user 
+
+services:
+
+  ##########################################
+  # mariadb: The database used by local
+  ##########################################
+  mariadb:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: drupal
+      MARIADB_USER: drupal
+      MARIADB_PASSWORD: drupal
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "--silent",
+          "--password=root"
+        ]
+    volumes:
+      - ./data/mariadb/init:/docker-entrypoint-initdb.d
+      - ./data/mariadb/db:/var/lib/mysql
+
+  ##########################################
+  # nginx-proxy: Nginx reverse proxy for docker containers
+  ##########################################
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  ##########################################
+  # adminer: The database tool used by local
+  ##########################################
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
+    depends_on:
+      - mariadb
+    ports:
+      - "1801:8080"
+
+  ##########################################
+  # mailhog: The email tool used by local
+  ##########################################
+  mailhog:
+    image: mailhog/mailhog
+    environment:
+      - VIRTUAL_HOST=mailhog.test
+      - VIRTUAL_PORT=8025
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+networks:
+  default:
+    external: false

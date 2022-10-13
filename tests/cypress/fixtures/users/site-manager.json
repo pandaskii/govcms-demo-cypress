@@ -1,0 +1,8 @@
+{
+    "firstname": "Manager",
+    "lastname": "Example",
+    "email": "site.manager@demo.govcms.test",
+    "password": "letmein",
+    "lang": "english",
+    "role": "govcms_site_administrator"
+}

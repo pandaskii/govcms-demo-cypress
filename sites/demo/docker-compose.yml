@@ -1,0 +1,12 @@
+services:
+
+  demo:
+    image: govcms.ops/govcms
+    environment:
+      - VIRTUAL_HOST=demo.govcms.test
+      - VIRTUAL_PORT=80
+    volumes:
+      - ./sites/demo/database:/app/database
+      - ./sites/demo/modules:/var/www/html/modules/demo
+      - ./sites/demo/themes:/var/www/html/themes/demo
+      - ./sites/demo/sites:/var/www/html/sites
